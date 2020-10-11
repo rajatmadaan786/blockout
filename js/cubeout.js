@@ -2116,7 +2116,7 @@ function save_score() {
   for (var name in HIGHSCORE) {
     tmp.push(name + '|' + HIGHSCORE[name].mode + '|' + HIGHSCORE[name].score);
   }
-  localStorage.setItem('co_highscore', JSON.stringify(tmp));
+  $.cookie('co_highscore', tmp.join(','), { expires: 10000 });
 }
 
 function load_score() {
@@ -2137,6 +2137,7 @@ function load_score() {
 function generate_highscores() {
   var tmp = [];
   for (var name in HIGHSCORE) {
+    console.log(name);
     var chunks = HIGHSCORE[name].mode.split(':');
     var dim = chunks[0];
     var s = chunks[1];
@@ -2323,12 +2324,10 @@ $(document).ready(function () {
 
   refresh_column();
 
-  let highScoresData = JSON.parse(window.localStorage.getItem('co_highscore'))[0];
-  if(highScoresData){
-    let highScore = highScoresData.split('|')[2];
-    $('#highscore').text(highScore);
-    $('#username').val(highScoresData.split('|')[0])
+  for (var name in HIGHSCORE) {
+    $('#highscore').text(pretty_number(HIGHSCORE[name].score));
   }
+
 });
 
 function showScoreUI() {
