@@ -2328,7 +2328,9 @@ $(document).ready(function () {
   for (var name in HIGHSCORE) {
     allscores.push(HIGHSCORE[name].score);
   }
-  $('#highscore').text(pretty_number(Math.max(...allscores)));
+  if(allscores.length>0){
+    $('#highscore').text(pretty_number(Math.max(...allscores)));
+  }
 
 });
 
