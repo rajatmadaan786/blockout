@@ -1549,7 +1549,7 @@ function init_game_keys(canvas, ctx) {
 }
 
 function end_game(canvas, ctx) {
-  $(document).unbind('keydown');
+  $(document).off('keydown');
   set_ui_gameover();
   CANVAS = canvas;
   CTX = ctx;
@@ -1707,7 +1707,7 @@ function handle_key(e, canvas, ctx) {
 }
 
 function play_game(canvas, ctx, start_handler) {
-  $(document).unbind('keydown', start_handler);
+  $(document).off('keydown', start_handler);
   set_ui_game();
   reset_pit(0);
   refresh_column();
